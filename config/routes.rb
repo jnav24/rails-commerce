@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  root to: "pages#home"
+  devise_for :admins
+  devise_for :users
+  resources :courses
 
   get "/up/", to: "up#index", as: :up
   get "/up/databases", to: "up#databases", as: :up_databases
@@ -22,4 +24,5 @@ Rails.application.routes.draw do
   # end
 
   # Learn more about this file at: https://guides.rubyonrails.org/routing.html
+  root "courses#index"
 end
