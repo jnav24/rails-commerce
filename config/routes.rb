@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   devise_for :users
   resources :courses
 
+  authenticated :admin_user do
+    root to: "admin#index", as: :admin_root
+  end
+
   get "/up/", to: "up#index", as: :up
+  get "admin" => "admin#index"
   get "/up/databases", to: "up#databases", as: :up_databases
 
   # Sidekiq has a web dashboard which you can enable below. It's turned off by
@@ -24,10 +29,6 @@ Rails.application.routes.draw do
   # end
 
   # Learn more about this file at: https://guides.rubyonrails.org/routing.html
-
-  authenticated :admin_user do
-    root to: "admin#index", as: :admin_root
-  end
 
   root "courses#index"
 end
