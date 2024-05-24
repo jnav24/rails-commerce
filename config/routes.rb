@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :admins
+  devise_for :admins, skip: [:registrations]
   devise_for :users
   resources :courses
 
@@ -24,5 +24,10 @@ Rails.application.routes.draw do
   # end
 
   # Learn more about this file at: https://guides.rubyonrails.org/routing.html
+
+  authenticated :admin_user do
+    root to: "admin#index", as: :admin_root
+  end
+
   root "courses#index"
 end
