@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  resources :lessons
   devise_for :admins, skip: [:registrations]
   devise_for :users
-  resources :courses
+  resources :courses do
+    resources :lessons
+  end
 
   authenticated :admin_user do
     root to: "admin#index", as: :admin_root
